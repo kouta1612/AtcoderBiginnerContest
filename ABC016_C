@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class Main {
+
+	static int n, m;
+	static int[][] gragh;
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		n = sc.nextInt();
+		m = sc.nextInt();
+		int[] a = new int[m];
+		int[] b = new int[m];
+		gragh = new int[n][n];
+		for(int i = 0 ; i < n ; i++) {
+			for(int j = 0 ; j < n ; j++) {
+				if(i == j) gragh[i][j] = 0;
+				else gragh[i][j] = gragh[j][i] = Integer.MAX_VALUE / 2;
+			}
+		}
+		for(int i = 0 ; i < m ; i++) {
+			a[i] = sc.nextInt() - 1;
+			b[i] = sc.nextInt() - 1;
+			gragh[a[i]][b[i]] = gragh[b[i]][a[i]] = 1;
+		}
+		for(int k = 0 ; k < n ; k++) {
+			for(int i = 0 ; i < n ; i++) {
+				for(int j = 0 ; j < n ; j++) {
+					gragh[i][j] = Math.min(gragh[i][j], gragh[i][k] + gragh[k][j]);
+				}
+			}
+		}
+		int[] ans = new int[n];
+		for(int i = 0 ; i < n ; i++) {
+			for(int j = 0 ; j < n ; j++) {
+				if(gragh[i][j] == 2) {
+					ans[i]++;
+				}
+			}
+		}
+		for(int i = 0 ; i < n ; i++) {
+			System.out.println(ans[i]);
+		}
+	}
+}
