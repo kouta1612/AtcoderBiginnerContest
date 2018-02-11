@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class Main {
+
+	static int w, h, mod;
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		w = sc.nextInt();
+		h = sc.nextInt();
+		mod = 1000000007;
+		long ans = 1;
+		// (w + h - 2)! / (w - 1)!(h - 1)!を求める
+
+		for(int i = 1 ; i <= w + h - 2 ; i++) {
+			ans *= i;
+			ans %= mod;
+		}
+		for(int i = 1 ; i < w ; i++) {
+			ans *= func(i, mod - 2, mod);
+			ans %= mod;
+		}
+		for(int i = 1 ; i < h ; i++) {
+			ans *= func(i, mod - 2, mod);
+			ans %= mod;
+		}
+		System.out.println(ans);
+	}
+
+	public static long func(int a, int b, int p) {
+		if(b == 0) {
+			return 1;
+		} else if(b % 2 == 0) {
+			long d = func(a, b / 2, p);
+			return d * d % p;
+		} else {
+			return (a * func(a, b - 1, p)) % p;
+		}
+	}
+
+}
