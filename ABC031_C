@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int[] a = new int[n];
+		for(int i = 0  ; i < n ; i++) a[i] = sc.nextInt();
+		int ans = -10000000;
+		for(int i = 0 ; i < n ; i++) {
+			int maxA = -1000000;
+			int maxT = -1000000;
+			for(int j = 0 ; j < n ; j++) {
+				int aoki = 0;
+				int takahashi = 0;
+				int turn = 0;
+				if(i == j) continue;
+				else if(i < j) {
+					if(Math.abs(i - j) % 2 == 0) continue;
+					for(int k = i ; k <= j ; k++) {
+						if(turn % 2 == 1) {
+							aoki += a[k];
+						} else {
+							takahashi += a[k];
+						}
+						turn++;
+					}
+				} else {
+					for(int k = j ; k <= i ; k++) {
+						if(turn % 2 == 1) {
+							aoki += a[k];
+						} else {
+							takahashi += a[k];
+						}
+						turn++;
+					}
+				}
+				if(maxA < aoki) {
+					maxA = aoki;
+					maxT = takahashi;
+				}
+			}
+			ans = Math.max(ans, maxT);
+		}
+		System.out.println(ans);
+	}
+}
