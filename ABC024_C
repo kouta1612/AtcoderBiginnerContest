@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int d = sc.nextInt();
+		int k = sc.nextInt();
+		int[] l = new int[d];
+		int[] r = new int[d];
+		int[] s = new int[k];
+		int[] t = new int[k];
+		for(int i = 0 ; i < d ; i++) {
+			l[i] = sc.nextInt();
+			r[i] = sc.nextInt();
+		}
+		for(int i = 0 ; i < k ; i++) {
+			s[i] = sc.nextInt();
+			t[i] = sc.nextInt();
+		}
+		for(int i = 0 ; i < k ; i++) {
+			int ans = 0; int now = s[i];
+			for(int j = 0 ; j < d ; j++) {
+				ans++;
+				if(s[i] < t[i]) {
+					if(now >= l[j] && now <= r[j]) {
+						now = r[j];
+						if(now >= t[i]) {
+							System.out.println(ans);
+							break;
+						}
+					}
+				} else {
+					if(now >= l[j] && now <= r[j]) {
+						now = l[j];
+						if(now <= t[i]) {
+							System.out.println(ans);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+}
