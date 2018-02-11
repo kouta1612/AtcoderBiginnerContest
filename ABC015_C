@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Main {
+
+	static int n, k;
+	static int[][] t;
+
+	public static void main(String[] args) {
+		Scanner	sc = new Scanner(System.in);
+		n = sc.nextInt();
+		k = sc.nextInt();
+		t = new int[n][k];
+		for(int i = 0 ; i < n ; i++) {
+			for(int j = 0 ; j < k ; j++) {
+				t[i][j] = sc.nextInt();
+			}
+		}
+		if(dfs(0, 0) == true) {
+			System.out.println("Found");
+		} else {
+			System.out.println("Nothing");
+		}
+	}
+
+	public static boolean dfs(int depth, int sum) {
+		if(depth == n) {
+			return sum == 0;
+		}
+		for(int i = 0 ; i < k ; i++) {
+			if(dfs(depth + 1, sum^t[depth][i])) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+}
