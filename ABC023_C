@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class Main {
+
+	static final int MAX = 100010;
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int x = sc.nextInt();
+		int y = sc.nextInt();
+		int k = sc.nextInt();
+		int n = sc.nextInt();
+		int[] s = new int[n];
+		int[] t = new int[n];
+		int[] cnt_x = new int[x];
+		int[] cnt_y = new int[y];
+		// cnt_x[i]:i行目にある飴の数
+		// cnt_y[i]:i列目にある飴の数
+		for(int i = 0 ; i < n ; i++) {
+			s[i] = sc.nextInt() - 1;
+			t[i] = sc.nextInt() - 1;
+			cnt_x[s[i]]++;
+			cnt_y[t[i]]++;
+		}
+		// X[i]:飴がi個ある行数
+		// Y[i]:飴がi個ある列数
+		int[] X = new int[MAX];
+		int[] Y = new int[MAX];
+		for(int i = 0 ; i < x ; i++) {
+			X[cnt_x[i]]++;
+		}
+		for(int i = 0 ; i < y ; i++) {
+			Y[cnt_y[i]]++;
+		}
+		long ans = 0;
+		for(int i = 0 ; i <= k ; i++) {
+			ans += X[i] * Y[k - i];
+		}
+		for(int i = 0 ; i < n ; i++) {
+			if(cnt_x[s[i]] + cnt_y[t[i]] == k) ans--;
+			else if(cnt_x[s[i]] + cnt_y[t[i]] == k + 1) ans++;
+		}
+		System.out.println(ans);
+	}
+}
