@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		long n = sc.nextLong();
+		long h = sc.nextLong();
+		long a = sc.nextLong();
+		long b = sc.nextLong();
+		long c = sc.nextLong();
+		long d = sc.nextLong();
+		long e = sc.nextLong();
+		long ans = Long.MAX_VALUE;
+		// i:普通の食事の日数を固定する
+		for(long i = 0 ; i <= n ; i++) {
+			// j:質素な食事の最低限必要な日数
+			long j = 0;
+			if(e * (n - i) - (h + i * b) > 0) j = (e * (n - i) - (h + i * b)) / (d + e) + 1;
+			ans = Math.min(ans, i * a + j * c);
+		}
+		System.out.println(ans);
+	}
+}
