@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		double x = sc.nextInt();
+		int y = sc.nextInt();
+		String[] s = {"N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"};
+		String ans = "";
+		if(0 <= y && y <= 14) {
+			ans += "C" + " ";
+		} else {// s[0]-s[15]
+			for(int i = 0 ; i <= 14 ; i++) {
+				if(112.5 + i * 225 <= x && x < 337.5 + i * 225) {
+					ans += s[i + 1] + " ";
+					break;
+				}
+			}
+			if(ans.equals("")) {
+				ans = s[0] + " ";
+			}
+		}
+		String[] a = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+		if(0 <= y && y <= 14) {
+			ans += a[0];
+		} else if(15 <= y && y <= 92) {
+			ans += a[1];
+		} else if(93 <= y && y <= 200) {
+			ans += a[2];
+		} else if(201 <= y && y <= 326) {
+			ans += a[3];
+		} else if(327 <= y && y <= 476) {
+			ans += a[4];
+		} else if(477 <= y && y <= 644) {
+			ans += a[5];
+		} else if(645 <= y && y <= 830) {
+			ans += a[6];
+		} else if(831<= y && y <= 1028) {
+			ans += a[7];
+		} else if(1029 <= y && y <= 1244) {
+			ans += a[8];
+		} else if(1245 <= y && y <= 1466) {
+			ans += a[9];
+		} else if(1467 <= y && y <= 1706) {
+			ans += a[10];
+		} else if(1707 <= y && y <= 1958) {
+			ans += a[11];
+		} else if(1959 <= y) {
+			ans += a[12];
+		}
+		System.out.println(ans);
+	}
+}
