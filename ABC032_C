@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int k = sc.nextInt();
+		int[] a = new int[n];
+		for(int i = 0 ; i < n ; i++) a[i] = sc.nextInt();
+		boolean ok = false;
+		for(int i = 0 ; i < n ; i++) {
+			if(a[i] == 0) ok = true;
+		}
+		if(ok) {
+			System.out.println(n);
+			return;
+		}
+		int l = 0;
+		int r = 0;
+		long temp = 1;
+		int ans = 0;
+		while(l < n) {
+			while(r < n && temp * a[r] <= k) {
+				temp *= a[r];
+				r++;
+			}
+			ans = Math.max(ans, r - l);
+			if(temp != 1) {
+				temp /= a[l];
+			}
+			l++;
+			if(l > r) r = l;
+		}
+		System.out.println(ans);
+	}
+}
